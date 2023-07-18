@@ -1,0 +1,17 @@
+{
+    "name": "jrfernandodasilva/ba-image-php",
+    "autoload": {
+        "psr-4": {
+            "FernandoJr\\BaImagePhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "fernandojr",
+            "email": "jr.fernandodasilva@gmail.com"
+        }
+    ],
+    "require": {
+        "ajaz/random-quotes-generator-php": "^1.0"
+    }
+}

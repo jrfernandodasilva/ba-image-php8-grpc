@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ba-image:latest
+    container_name: ba-image-app
+    restart: unless-stopped
+    ports:
+      - 83:80
+    volumes:
+      - ./app:/var/www/app
+  mariadb:
+    image: mariadb:10.3.27
+    container_name: ba-image-mariadb
+    restart: unless-stopped
+    ports:
+      - "3311:3306"
+    command: --default-authentication-plugin=mariadb_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: teste
+    volumes:
+      - data.mariadb:/var/lib/mysql
+  redis:
+    image: redis:6
+    volumes:
+      - 'data.redis:/data'
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+volumes:
+  data.mariadb:
+    driver: local
+  data.redis:
+    driver: local
